@@ -48,7 +48,8 @@ def main(stdscr):
                 stdscr.addstr(line)
                 #stdscr.chgat(selected,0,-1,curses.A_REVERSE)
         # Status Line:
-        stdscr.addstr(maxh-1,0,f"[{selected}] start:{startline} end:{endline} maxh:{maxh}q:Exit j:up k:down b:send2Burp o:openInBrowser h:help")
+        stdscr.addstr(maxh-1,0,f"[{selected}] q:Exit j:up k:down h:help for more commands")
+        #stdscr.addstr(maxh-1,0,f"[{selected}] start:{startline} end:{endline} maxh:{maxh}q:Exit j:up k:down h:help for more commands")
         stdscr.refresh()
         key = stdscr.getkey()
         if key == 'q':
@@ -82,9 +83,10 @@ def print_help(stdscr):
     stdscr.addstr("q: Quit\n")
     stdscr.addstr("j: Down\n")
     stdscr.addstr("k: Up\n")
-    stdscr.addstr("o: Open current Line in Browser\n")
-    stdscr.addstr("g: google current line in Browser\n")
-    stdscr.addstr("b: open current line in Burp\n")
+    for key in commands.keys():
+        d = commands[key]['description']
+        stdscr.addstr(f"{key}: {d}\n")
+    stdscr.addstr("[PRESS ANY KEY TO EXIT HELP]")
     stdscr.refresh()
     stdscr.getkey()
 
